@@ -1,0 +1,81 @@
+\documentclass[notitlepage,12pt]{article}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[margin=0.5in]{geometry}
+\date{\vspace{-5ex}}
+
+\renewcommand{\abstractname}{Tweet}
+
+\begin{document}
+\title{Title of the Research Paper}
+\author{Reviewed by Your Name}
+\maketitle
+
+\abstract{\it % <- This makes the tweet italicized.
+Cassandra~\cite{lakshman2010cassandra} was built at Facebook to deal with a common social networking problem --- write-heavy workloads --- since people tend to generate lots of text that is not actually read by anyone. Powering the cold, heartless Internet echo chamber!
+}
+
+
+\section{Critical Analysis}
+Cassandra is unique in that it employs a distributed hash table network design similar to Dynamo~\cite{decandia2007dynamo} while supporting a column-oriented data model similar to BigTable~\cite{chang2008bigtable}. This allows scalability, straightforward routing, and more expressive data storage than a simple blob store. However, much of the methodology in the paper is based on the assumption that traditional spinning HDDs will be used (this paper predates ubiquity of SSDs). I'm curious whether the tradeoffs they made in the paper still make sense in 2020. One interesting thing I found digging around online is that the SSTable data structure is used in \emph{several} other projects: LevelDB, internally at Google, etc. So they have broad applicability. \textbf{Note: your review should have a bit more to it; this is just an example}.
+
+\subsection{Strengths and Weaknesses}
+\begin{itemize}
+    \item Strength: The system scales out to hundreds of machines
+    \item Weakness: it \textit{probably} can't scale out to thousands of machines. Imagine if you have 50,000 machines and they all have to maintain an accurate routing table, that's going to be BAD NEWS.
+    \item It is in some way related to Mark Zuckerberg, who I am not a big fan of.
+\end{itemize}
+
+If we wanted 50k machines: A perhaps better approach would be to use the Chord algorithm to organize the DHT (basically, don't make a zero-hop DHT).
+
+
+\section{Accept/Reject Decision}
+\textbf{Accept (+1)}. This was a unique approach and underscores how important it is to tailor your backend storage system to the particular problem you're solving.
+
+\pagebreak
+
+\section{Additional Instructions}
+The example above is just that: an example. Just remember that I'm looking for quality here, not necessarily quantity of text.
+
+\subsection{References}
+If you used any external references while writing your review, be sure to cite them. Representing someone else's work as your own violates the university honor code. This review was heavily plagiarized from \cite{bigdata}.
+
+\section{Grading}
+For these submissions, grading is based on a simplified scale:
+\begin{itemize}
+\item 10 -- excellent analysis with insightful comments.
+\item 9 -- excellent analysis with minor issues (small inaccuracies or missing details).
+\item 8 -- fulfills the requirements but the analysis is mostly straightforward. This is most common.
+\item 7 -- not all requirements met, straightforward analysis.
+\item $\leq$ 5 -- substantially missing the mark, not including all elements, obvious inaccuracies, etc.
+\end{itemize}
+
+\section{Submission \& Formatting}
+Submit your write-up in PDF format via canvas. \vspace{1em} % inserts 1-character vertical space
+
+\noindent Some of your tweets and accept/reject decisions will be featured in our class discussions.
+
+By the way, you can insert \texttt{fixed-width text} or even equations:
+
+\begin{equation}
+    \label{simple_equation}
+    a^2 + b^2 = c^2
+\end{equation}
+
+\noindent See Figure~\ref{fig:usf-logo} below for an example of a figure.
+
+% LaTeX will try to place figures automatically by itself.
+\begin{figure}[h!] % 'h!' means 'put this figure here, NOW!'
+    % Figures usually look best centered in the column:
+    \centering
+
+    % Here, we set the figure's size to 25% of the line width.
+    \includegraphics[width=0.15\linewidth]{usf-blue.pdf}
+    \caption{A figure showing USF's logo, sized at 25\% of the line. How glorious.}
+    \label{fig:usf-logo}
+\end{figure}
+
+\bibliographystyle{plain}
+\bibliography{references} 
+
+\end{document}
